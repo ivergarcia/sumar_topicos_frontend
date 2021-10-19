@@ -23,12 +23,12 @@ class _HomeScreenState extends State<HomeScreen> {
   Future sumar() async {
     if( _numero1Controller.text.isNotEmpty && _numero2Controller.text.isNotEmpty ) {
       final data = {
-        'valor1': num.parse(_numero1Controller.text),
-        'valor2': num.parse(_numero2Controller.text)
+        'valor1': _numero1Controller.text,
+        'valor2': _numero2Controller.text
       };
-      final json = await _dio.post('http://localhost:3000/api/sumar', data: data);
+      final json = await _dio.post('http://192.168.100.10:3000/api/operations', data: data);
       setState(() {
-        resultado = json.data['result'];
+        resultado = json.data['sumar'];
       });
     }
   }
@@ -50,6 +50,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Sumar dos numeros')
+      ),
       body: Container(
           padding: EdgeInsets.all(20),
           child: Column(
